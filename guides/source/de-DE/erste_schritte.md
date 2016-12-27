@@ -8,7 +8,7 @@ Dieser Leitfaden umfasst das Einrichten und Ausführen von Ruby on Rails.
 Nach dem Lesen des Leitfadens wird man folgendes wissen:
 
 * Wie man Rails installiert, eine neue Railsanwendung erstellt und die
-  Applikation mit einer Datenbank verbindet.
+  Anwendung mit einer Datenbank verbindet.
 * Der allgemeine Aufbau einer Railsanwendung.
 * Die grundlegenden Prinzipien von MVC (Model, View, Controller) und RESTful Design.
 * Wie man schnell die Startkomponenten einer Railsanwendung erstellt.
@@ -26,30 +26,30 @@ erfüllt sein:
 * [Ruby](https://www.ruby-lang.org/en/downloads) Version 2.2.2 oder aktueller.
 * Die richtige Version des [Development Kit](http://rubyinstaller.org/downloads/),
   wenn man Windows benutzt.
-* Das [RubyGems](https://rubygems.org) Packaging System, das standardmäßig mit
+* Das [RubyGems](https://rubygems.org) Packet System, das standardmäßig mit
   Ruby installiert wird. Weiterführende Informationen über RubyGems gibt es hier:
   [RubyGems Guides](http://guides.rubygems.org).
 * Einer funktionierende Installation einer [SQLite3 Datenbank](https://www.sqlite.org).
 
 Rails ist ein Framework für Webanwendungen basierend auf der Programmiersprache Ruby.
-Wenn man noch keine Erfahrung mit Ruby hat, gibt es eine sehr steile Lernkurve
-beim Erlernen von Rails. Es gibt einige Listen mit verschiedenen Möglichkeiten,
+Wenn man noch keine Erfahrung mit Ruby hat, gibt es eine sehr hohe Lernkurve
+beim Erlernen von Rails. Es einige Möglichkeiten,
 um Ruby online zu lernen:
 
 * [Die offizielle Webseite von Ruby](https://www.ruby-lang.org/en/documentation/)
 * [Eine Liste mit kostenfreien Programmierbüchern](https://github.com/vhf/free-programming-books/blob/master/free-programming-books.md#ruby)
 
-Man muss sich aber bewusst sein, dass manche Quellen, auch wenn sie großartig sind,
+Man muss sich aber bewusst sein, dass manche Quellen, auch wenn sie sehr gut sind,
 alte Versionen von Ruby (1.6 oder überlicherweise 1.8) abdecken und keine Syntax
-der aktuellen Railsversion abbilden.
+der aktuellen Railsversion zeigen.
 
 Was ist Rails?
 --------------
 
 Rails ist ein Framework für Webanwendungen, dass in Ruby geschrieben wurde.
 Es ist so konzipiert, dass Webanwendungen leicht erstellt werden können, indem
-Annahmen getroffen wurden, die jeder Entwickler benötigt um anzufangen. Rails
-ermöglicht es mit weniger Code mehr zu erreichen als andere Sprachen oder
+Feststellungen getroffen wurden, die jeder Entwickler benötigt um anzufangen.
+Rails ermöglicht es mit weniger Code mehr zu erreichen als andere Sprachen oder
 Frameworks. Erfahrene Railsentwickler berichten auch, dass es mehr Spaß macht
 Webanwendungen zu erstellen.
 
@@ -67,7 +67,7 @@ Die Philosophie von Rails beinhaltet 2 Hauptprinzipien:
   Softwareentwicklung, das besagt, dass "Jede Erkenntnis eine einzelne,
   eindeutige und verbindliche Darstellung innerhalb eines Systems haben muss."
   Wenn eine Information nicht immer und immer wieder geschrieben werden muss,
-  lässt sich der Code auch besser verwalten, erweitern und ist weniger fehlerhaft.
+  lässt sich der Code besser verwalten, erweitern und ist weniger fehlerhaft.
 * **Convention Over Configuration (Konvention über Konfiguration):** Rails hat
   eigene Vorstellungen davon, wie der beste Weg aussieht, um Dinge in einer
   Webanwendung zu tun und spezifiziert das in einer Reihe von Konventionen,
@@ -85,17 +85,17 @@ ein (sehr) einfacher Weblog. Vor dem Erstellen der Anwendung muss sichergestellt
 werden, dass Rails selbst installiert ist.
 
 TIPP: Die folgenden Beispiele nutzen `$`, um das Terminal in einem unixoiden
-Betriebssystem darzustellen, auch wenn das Aussehen geändert worden sein kann.
+Betriebssystem darzustellen (auch wenn das Aussehen geändert worden sein kann).
 Wenn man Windows nutzt, wird das Terminal ungefähr so aussehen:
 `c:\source_code>`.
 
 ### Rails installieren
 
-Öffne ein Terminal. Unter Mac OS X öffne Terminal.app, unter Windows muss man
-"Ausführen" aus dem Startmenü aufrufen und 'cmd.exe' eingeben und bestätigen.
-Alle Befehle, die mit einem Dollarzeichen `$` anfangen, sollen im Terminal
-ausgeführt werden. Es muss sichergestellt werden, dass man die aktuelle
-Rubyversion installiert hat:
+Es muss ein Terminal geöffnet werden: Unter Mac OS X öffne Terminal.app, unter
+Windows muss man "Ausführen" aus dem Startmenü aufrufen und 'cmd.exe' eingeben
+und bestätigen. Alle Befehle, die mit einem Dollarzeichen `$` anfangen, sollen
+im Terminal ausgeführt werden. Es muss sichergestellt werden, dass man die
+aktuelle Rubyversion installiert hat:
 
 ```bash
 $ ruby -v
@@ -112,7 +112,7 @@ nachschauen.
 Viele bekannte unixoide Betriebssysteme kommen standardmäßig mit einer
 passenden SQLite3-Version. Wenn man Rails mit dem Railsinstaller unter
 Windows installiert hat, hat man automatisch auch SQLite installiert.
-Wenn nicht, gibt es auf der [SQLite3 website](https://www.sqlite.org)
+Wenn nicht, gibt es auf der [SQLite3 Website](https://www.sqlite.org)
 Installationsanweisungen.
 Es muss überprüft werden, ob es korrekt installiert wurde.
 
@@ -120,9 +120,9 @@ Es muss überprüft werden, ob es korrekt installiert wurde.
 $ sqlite3 --version
 ```
 
-Das Programm sollte die Version ausgeben.
+Dieser Befehl sollte die installierte Version ausgeben.
 
-Rails wird über den Befehl `gem install` von RubyGems installiert:
+Rails wird über den Befehl `gem install` installiert:
 
 ```bash
 $ gem install rails
@@ -139,9 +139,9 @@ Wenn etwas wie "Rails 5.0.0" ausgegeben wird, kann man weitermachen.
 
 ### Erstellen der Bloganwendung
 
-Rails hat einige Skripte, die generators genannt werden, die erstellt wurden,
+Rails hat einige Skripte, die "generators" genannt werden, die erstellt wurden,
 um die Entwicklung leichter zu machen, in dem sie alles bereitstellen, dass
-nötig ist, um eine bestimmte Aufgabe anzufangen. Eine dieser Skripte ist der
+nötig ist, um eine bestimmte Aufgabe anzufangen. Eines dieser Skripte ist der
 Generator zum Erstellen einer neuen Anwendung, der die Grundlage einer
 frischen Railsanwendung bereitstellt, so dass man sie nicht selbst anlegen muss.
 
@@ -156,9 +156,10 @@ Dies wird eine Railsanwendung namens Blog in einem `blog` Verzeichnis
 erstellen und die Gem-Abhängigkeiten, die in der `Gemfile` festgelegt sind,
 über `bundle install` installieren.
 
-HINWEIS: Es gibt ein paar Beschränkungen des Dateisystems, wenn man ein Windows
-Subsystem für Linux nutzt. Das bedeutet, dass man die Gems `spring` und `listen`
-deaktivieren sollte. Das geht über den Befehl `rails new blog --skip-spring --skip-listen`.
+HINWEIS: Es gibt ein paar Beschränkungen des Dateisystems, wenn man ein
+Windows-Subsystem für Linux nutzt. Das bedeutet, dass man die Gems `spring`
+und `listen` deaktivieren sollte. Das geht über den Befehl
+`rails new blog --skip-spring --skip-listen`.
 
 TIPP: Mit dem Befehl `rails new -h` sieht man alle Kommandozeilenbefehle, die
 der Railsbuilder akzeptiert.
@@ -179,9 +180,9 @@ die Funktionen der Dateien und Ordner, die Rails standardmäßig erstellt:
 |app/|Beinhaltet die Controller, Models, Views, Helpers, Mailers, Channels, Jobs und Assets für die Anwendung. Der restliche Teil dieses Leitfadens fokussiert sich auf diesen Ordner.|
 |bin/|Enthält das Railsskript, dass die Anwendung startet und einige andere Skripte zur Einrichtung, Aktualisierung, Verteilung oder zum Laufen der Anwendung.|
 |config/|Hier werden die Routen, Datenbanken und noch mehr konfiguriert. Detailierter wird es in [Konfigurieren einer Railsanwendung](configuring.html) beschrieben.|
-|config.ru|Enthält die Rackkonfiguration für Rackbasierte Server, um die Anwendung zu starten.|
+|config.ru|Enthält die Rackkonfiguration für rackbasierte Server, um die Anwendung zu starten.|
 |db/|Enthält das aktuelle Datenbankschmema, sowie die Datenbankmigrationen.|
-|Gemfile<br>Gemfile.lock|Diese Dateien erlauben es, die Gemabhängigkeiten der Anwendung genauer zu spezifizieren. Diese Dateien werden von dem Bundlergem genutzt. Weitere Informationen zu Bundler gibt es hier: [Bundler website](http://bundler.io).|
+|Gemfile<br>Gemfile.lock|Diese Dateien erlauben es, die Gemabhängigkeiten der Anwendung genauer festzulegen. Diese Dateien werden von dem Bundlergem genutzt. Weitere Informationen zu Bundler gibt es hier: [Bundler Website](http://bundler.io).|
 |lib/|Erweiterte Module für die Anwendung.|
 |log/|Die Logdateien der Anwendung.|
 |public/|Der einzige Ordner, der von außen so gesehen wird, wie er ist. Enthält statische Dateien und kompilierte Assets.|
@@ -221,34 +222,34 @@ in einer kommentierten Zeile in der erstellten `Gemfile` hinzu. Bei Bedarf
 kann der Kommentar entfernt werden.
 `therubyrhino` ist die empfohlene Laufzeitumgebung für JRuby-Benutzer und ist
 standardmäßig in der `Gemfile` enthalten, wenn Anwendung unter JRuby erstellt
-werden. Alle unterstützen Laufzeitumgebungen sind hier aufgeführt
+werden. Alle unterstützen Laufzeitumgebungen sind hier aufgeführt:
 [ExecJS](https://github.com/rails/execjs#readme).
 
-Dieser Befehl startet Puma, einen Webserver, der automatisch mit Rails
+Der oben genannte Befehl startet Puma, einen Webserver, der automatisch mit Rails
 ausgeliefert wird. Um die laufende Anwedung zu sehen, muss man ein
 Browserfenster öffnen und die Adresse <http://localhost:3000> aufrufen.
 Man sollte nun die voreingestellte Informationsseite sehen:
 
-![Welcome aboard screenshot](images/getting_started/rails_welcome.png)
+![Welcome aboard screenshot](images/erste_schritte/rails_welcome.png)
 
 TIPP: Um den Webserver zu stoppen, muss man in dem Terminalfenster, in dem der
 Server läuft STRG+C drücken. Nun sollte man den normalen Cursor im Terminal
 sehen. Für die meisten unixoiden Betriebssysteme, was auch Mac OS X beinhaltet,
 ist das ein Dollarzeichen `$`. Im Entwicklungsmodus von Rails ist ein Neustart
-allgemein nicht nötig. Veränderungen in Dateien werden vomn Server automatisch
+allgemein nicht nötig. Veränderungen in Dateien werden vom Server automatisch
 erkannt.
 
-Die Seite "Welcome aboard" ist ein _smoke test_ für eine neue Railsanwendung:
+Die Seite "Welcome aboard" ist ein _Rauchtest_ für eine neue Railsanwendung:
 Er stellt sicher, dass die Software richtig eingerichtet wurde, um eine
-Webseite darzustellen.
+Webseite anzuzeigen.
 
 ### Rails, sag "Hello"
 
-Um Rails dazu zu bringen "Hello" darzustellen, muss mindestens ein
+Um Rails dazu zu bringen "Hello" anzuzeigen, muss mindestens ein
 _controller_ und eine _view_ erstellt werden.
 
 Die Aufgabe eines Controllers ist es spezifische Anfragen der Anwendung zu
-empfangen. _Routing_ entscheidet, welcher Controller welche Anfrage empfängt.
+empfangen. Das _Routing_ entscheidet, welcher Controller welche Anfrage empfängt.
 Es gibt oft mehr als eine Route zu jedem Controller. Verschiedene Routen
 werden von verschiedenen _actions_ bedient. Die Aufgabe jeder Action ist es
 Informationen zu sammeln und diese der View zur Vergfügung zu stellen.
@@ -256,10 +257,10 @@ Informationen zu sammeln und diese der View zur Vergfügung zu stellen.
 Die Aufgabe der View ist es, diese Informationen in einem für Menschen
 lesbaren Format darzustellen. Ein wichtiger Unterschied ist, dass der
 _controller_ Informationen sammelt, nicht die View. Standardmäßig werden
-Templates der View in eRuby (Embedded Ruby) geschrieben, die erst verarbeitet
-werden, bevor sie zum Benutzer geschickt werden.
+Vorlagen (Templates) der View in eRuby (Embedded Ruby) geschrieben, die erst
+verarbeitet werden, bevor sie zum Benutzer geschickt werden.
 
-Um einen neuen Controller zu erstellen, muss der "Controller"-Generator
+Um einen neuen Controller zu erstellen, muss der Controller-Generator
 ausgeführt werden. In diesem Fall mit Namen "Welcome" und der Action "index":
 
 ```bash
@@ -290,7 +291,7 @@ Am Wichtigsten von diesen Dateien sind natürlich der Controller
 (der sich unter `app/controllers/welcome_controller.rb` befindet) und die
 View (die sich unter `app/views/welcome/index.html.erb` befindet),
 
-Nun wird die View in einem Texteditor geöffnet und alles darin gelöscht und
+Nun wird die View in einem Texteditor geöffnet, alles darin gelöscht und
 durch folgende Zeile ersetzt:
 
 ```html
@@ -300,9 +301,9 @@ durch folgende Zeile ersetzt:
 ### Einrichten der Hauptseite
 
 Jetzt, da der Controller und die View erstellt wurden, muss Rails noch
-mitgeteilt werden, wann "Hello, Rails!" erscheinen soll. In diesem Fall soll
-es erscheinen, wenn man die Hauptadresse <http://localhost:3000> aufruft.
-Im Moment wird das noch von "Welcome aboard" besetzt.
+mitgeteilt werden, in welchem Fall "Hello, Rails!" erscheinen soll. Hier soll
+es erscheinen, wenn man die Hauptadresse <http://localhost:3000> aufruft. Im
+Moment wird das aber noch von "Welcome aboard" besetzt.
 
 Als nächstes muss Rails wissen, wo sich die aktuelle Hauptseite befindet.
 
@@ -316,11 +317,11 @@ Rails.application.routes.draw do
 end
 ```
 
-Dies ist die _routing file_ der Anwendung die Einträge in einer bestimmten
+Dies ist die _routing file_ der Anwendung, die Einträge in einer bestimmten
 [DSL (domain-specific language)](http://en.wikipedia.org/wiki/Domain-specific_language)
 enthält. Durch diese weiß Rails, welche eintreffenden Anfragen mit welchem
 Controller und welcher Action verbunden werden sollen.
-Diese Datei muss um folgendes erweitert werden: `root 'welcome#index'`
+Diese Datei muss um folgendes erweitert werden: `root 'welcome#index'`.
 Dadurch sollte es jetzt so aussehen:
 
 ```ruby
@@ -332,20 +333,20 @@ end
 ```
 
 `root 'welcome#index'` teilt Rails mit, dass Anfragen auf die Hauptadresse der
-Anwendung durch die Index-Action des Welcome-Controllers abgebildet werden.
+Anwendung durch die Index-Action des Welcome-Controllers abgebildet werden sollen.
 `get 'welcome/index'` teilt Rails mit, dass Anfragen auf
-<http://localhost:3000/welcome/index> durch die Index-Action des
-Welcome-Controllers abgebildet werden. Dies wurde festgelegt, als der
+<http://localhost:3000/welcome/index> auch durch die Index-Action des
+Welcome-Controllers abgebildet werden sollen. Das wurde festgelegt, als der
 Generator des Controllers ausgeführt wurde
 (`bin/rails generate controller Welcome index`).
 
 Falls der Webserver für das Erstellen des Controllers gestoppt wurde, muss man
 ihn nun erneut starten (`bin/rails server`) und <http://localhost:3000> in
-einem Browser aufrufen. Jetzt sollte man "Hello, Rails!" sehen, was daraufhin
-deutet, dass die neue Route des `WelcomeController`s zur `index`-Action führt
+einem Browser aufrufen. Jetzt sollte man "Hello, Rails!" sehen, was zeigt,
+dass die neue Route des `WelcomeControllers` zur `index`-Action führt
 und die View korrekt dargestellt wird.
 
-TIPP: Weitere Informationen zum routing gibt es hier [Rails Routing from the Outside In](routing.html).
+TIPP: Weitere Informationen zum Routing gibt es hier [Rails Routing from the Outside In](routing.html).
 
 Konfigurieren und Ausführen
 ----------------------
@@ -353,13 +354,12 @@ Konfigurieren und Ausführen
 Jetzt, da man gesehen hat, wie man einen Controller, eine Action und eine View
 erstellt, kann man etwas anspruchsvolleres erstellen.
 
-In der Bloganwendung wird nun eine neue _resource_ erstellt. Eine Ressource ist
-ein Begriff, der für eine Sammlung gleicher Objekte, wie Artikel, Leute oder
-Tiere verwendet wird.
+In der Bloganwendung wird nun eine neue _resource_ erstellt. Eine resouce steht
+für eine Sammlung gleicher Objekte, wie Artikel, Leute oder Tiere verwendet wird.
 
 Man kann Einzelteile einer Ressouce erstellen (create), lesen (read),
 aktualisieren (update) und löschen (destroy). Diese Operationen werden als
-_CRUD_ -operationen bezeichnet.
+_CRUD_ -Operationen bezeichnet.
 
 Rails stellt eine `resources`-Funktion zur Verfügung, die genutzt werden kann,
 um eine standardmäßige REST-Ressource festzulegen. Man muss die
@@ -378,9 +378,9 @@ end
 
 Wenn man `bin/rails routes` ausführt, sieht man, dass es nun definierte Routen
 für alle standardmäßigen "RESTful Actions" gibt. Die Bedeutung der
-verschiedenen Spalten wird später erklärt. Fürs Erste reicht es festzustellen,
-dass Rails die Einzahl `article` annimmt und von diesem Unterschied Gebrauch
-macht.
+verschiedenen Spalten wird später erklärt. Fürs Erste reicht, dass man sieht,
+dass Rails die Einzahl `article` verwendet und von dem Unterschied zwischen
+Einzahl und Mehrzahl Gebrauch macht.
 
 ```bash
 $ bin/rails routes
@@ -401,7 +401,7 @@ Artikel anzulegen und diese anzuzeigen. Das ist das "C" und das "R" von
 CRUD: create (ersellen) und read (lesen). Das Formular für das Erstellen eines
 neuen Artikels wird so aussehen:
 
-![The new article form](images/getting_started/new_article.png)
+![Das Formular eines neuen Artikels](images/erste_schritte/new_article.png)
 
 Fürs Erste sieht das etwas einfach aus, aber das ist ok. Im weiteren Verlauf
 wird das Aussehen verbessert.
@@ -409,12 +409,12 @@ wird das Aussehen verbessert.
 ### Die Grundlage bilden
 
 Als erstes benötigt man einen Bereich innerhalb der Anwendung, um einen neuen
-Artikel zu erstellen. Ein großartiger Bereich dafür wäre unter `/articles/new`.
+Artikel zu erstellen. Ein passender Bereich dafür wäre unter `/articles/new`.
 Da die Route schon erstellt wurde, können nun Anfragen zu `/articles/new`
 gemacht werden. Wenn die Adresse <http://localhost:3000/articles/new> aufruft,
 erhält man einen Routingfehler:
 
-![Another routing error, uninitialized constant ArticlesController](images/getting_started/routing_error_no_controller.png)
+![Another routing error, uninitialized constant ArticlesController](images/erste_schritte/routing_error_no_controller.png)
 
 Dieser Fehler tritt auf, da die Route einen Controller haben muss, um die
 Anfrage zu bedienen. The Lösung für dieses spezielle Problem ist einfach:
@@ -434,7 +434,7 @@ end
 ```
 
 Ein Controller ist, einfach gesagt, eine Klasse, die so definiert ist, dass
-sie von `ApplicationController` vererbt ist.
+sie vom `ApplicationController` vererbt ist.
 Innerhalb dieser Klasse werden Methoden definiert, die dann Actions des
 Controllers werden. Diese Actions führen CRUD-Operationen auf Artikel aus.
 
@@ -446,7 +446,7 @@ Weitere Details finden sich unter [Programming Ruby](http://www.ruby-doc.org/doc
 Wenn man nun die Adresse <http://localhost:3000/articles/new> aktualisiert,
 bekommt man einen neuen Fehler angezeigt:
 
-![Unknown action new for ArticlesController!](images/getting_started/unknown_action_new_for_articles.png)
+![Unknown action new for ArticlesController!](images/erste_schritte/unknown_action_new_for_articles.png)
 
 Dieser Fehler weist darauf hin, dass Rails die Action `new` nicht im
 `ArticlesController` finden kann. Der Grund dafür ist, dass in Rails erstellte
@@ -469,8 +469,7 @@ Aktualisiert man die Adresse <http://localhost:3000/articles/new> mit der
 nun erstellten Methode `new` im `ArticlesController` sieht man einen
 anderen Fehler:
 
-![Template is missing for articles/new]
-(images/getting_started/template_is_missing_articles_new.png)
+![Template is missing for articles/new](images/erste_schritte/template_is_missing_articles_new.png)
 
 Man bekommt diesen Fehler, weil Rails bei einfachen Methoden, wie der gerade
 erstellten, erwartet, dass damit eine View verbunden ist, die die Informationen
@@ -481,7 +480,7 @@ komplett aus:
 
 >ArticlesController#new is missing a template for this request format and variant. request.formats: ["text/html"] request.variant: [] NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not… nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.
 
-Das ist schon sehr viel Text. Im Folgenden gibt es einen kurzen Überblickm, was
+Das ist schon sehr viel Text. Im Folgenden gibt es einen kurzen Überblick, was
 die Fehlermeldung im Einzelnen bedeutet.
 
 Der erste Teil beschreibt, welches Template fehlt. In diesem Fall ist es das
