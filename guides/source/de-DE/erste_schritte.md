@@ -178,7 +178,7 @@ die Funktionen der Dateien und Ordner, die Rails standardmäßig erstellt:
 | ------------ | ------- |
 |app/|Beinhaltet die Controller, Models, Views, Helpers, Mailers, Channels, Jobs und Assets für die Anwendung. Der restliche Teil dieses Leitfadens fokussiert sich auf diesen Ordner.|
 |bin/|Enthält das Railsskript, dass die Anwendung startet und einige andere Skripte zur Einrichtung, Aktualisierung, Verteilung oder zum Laufen der Anwendung.|
-|config/|Hier werden die Routes, Datenbanken und noch mehr konfiguriert. Detailierter wird es in [Konfigurieren einer Railsanwendung](configuring.html) beschrieben.|
+|config/|Hier werden die Routen, Datenbanken und noch mehr konfiguriert. Detailierter wird es in [Konfigurieren einer Railsanwendung](configuring.html) beschrieben.|
 |config.ru|Enthält die Rackkonfiguration für Rackbasierte Server, um die Anwendung zu starten.|
 |db/|Enthält das aktuelle Datenbankschmema, sowie die Datenbankmigrationen.|
 |Gemfile<br>Gemfile.lock|Diese Dateien erlauben es, die Gemabhängigkeiten der Anwendung genauer zu spezifizieren. Diese Dateien werden von dem Bundlergem genutzt. Weitere Informationen zu Bundler gibt es hier: [Bundler website](http://bundler.io).|
@@ -249,7 +249,7 @@ _controller_ und eine _view_ erstellt werden.
 
 Die Aufgabe eines Controllers ist es spezifische Anfragen der Anwendung zu
 empfangen. _Routing_ entscheidet, welcher Controller welche Anfrage empfängt.
-Es gibt oft mehr als eine Route zu jedem Controller. Verschiedene Routes
+Es gibt oft mehr als eine Route zu jedem Controller. Verschiedene Routen
 werden von verschiedenen _actions_ bedient. Die Aufgabe jeder Action ist es
 Informationen zu sammeln und diese der View zur Vergfügung zu stellen.
 
@@ -358,15 +358,13 @@ ein Begriff, der für eine Sammlung gleicher Objekte, wie Artikel, Leute oder
 Tiere verwendet wird.
 
 Man kann Einzelteile einer Ressouce erstellen (create), lesen (read),
-aktualisieren (update) und löschen (destroy).  
+aktualisieren (update) und löschen (destroy). Diese Operationen werden als
+_CRUD_ -operationen bezeichnet.
 
+Rails stellt eine `resources`-Funktion zur Verfügung, die genutzt werden kann,
+um eine standardmäßige REST-Ressource festzulegen. Man muss die
+_article resource_ folgendermaßen zu `config/routes.rb` hinzufügen:
 
-You can create, read, update and destroy items for a resource and these
-operations are referred to as _CRUD_ operations.
-
-Rails provides a `resources` method which can be used to declare a standard REST
-resource. You need to add the _article resource_ to the
-`config/routes.rb` so the file will look as follows:
 
 ```ruby
 Rails.application.routes.draw do
@@ -378,10 +376,11 @@ Rails.application.routes.draw do
 end
 ```
 
-If you run `bin/rails routes`, you'll see that it has defined routes for all the
-standard RESTful actions.  The meaning of the prefix column (and other columns)
-will be seen later, but for now notice that Rails has inferred the
-singular form `article` and makes meaningful use of the distinction.
+Wenn man `bin/rails routes` ausführt, sieht man, dass es nun definierte Routen
+für alle standardmäßigen "RESTful Actions" gibt. Die Bedeutung der
+verschiedenen Spalten wird später erklärt. Fürs Erste reicht es festzustellen,
+dass Rails die Einzahl `article` annimmt und von diesem Unterschied Gebrauch
+macht.
 
 ```bash
 $ bin/rails routes
@@ -397,65 +396,67 @@ edit_article GET    /articles/:id/edit(.:format) articles#edit
         root GET    /                            welcome#index
 ```
 
-In the next section, you will add the ability to create new articles in your
-application and be able to view them. This is the "C" and the "R" from CRUD:
-create and read. The form for doing this will look like this:
+Im nächsten Abschnitt wird in der Anwendung die Möglichkeit hinzugefügt neue
+Artikel anzulegen und diese anzuzeigen. Das ist das "C" und das "R" von
+CRUD: create (ersellen) und read (lesen). Das Formular für das Erstellen eines
+neuen Artikels wird so aussehen:
 
 ![The new article form](images/getting_started/new_article.png)
 
-It will look a little basic for now, but that's ok. We'll look at improving the
-styling for it afterwards.
+Fürs Erste sieht das etwas einfach aus, aber das ist ok. Im weiteren Verlauf
+wird das Aussehen verbessert.
 
-### Laying down the groundwork
+### Die Grundlage bilden
 
-Firstly, you need a place within the application to create a new article. A
-great place for that would be at `/articles/new`. With the route already
-defined, requests can now be made to `/articles/new` in the application.
-Navigate to <http://localhost:3000/articles/new> and you'll see a routing
-error:
+Als erstes benötigt man einen Bereich innerhalb der Anwendung, um einen neuen
+Artikel zu erstellen. Ein großartiger Bereich dafür wäre unter `/articles/new`.
+Da die Route schon erstellt wurde, können nun Anfragen zu `/articles/new`
+gemacht werden. Wenn die Adresse <http://localhost:3000/articles/new> aufruft,
+erhält man einen Routingfehler:
 
 ![Another routing error, uninitialized constant ArticlesController](images/getting_started/routing_error_no_controller.png)
 
-This error occurs because the route needs to have a controller defined in order
-to serve the request. The solution to this particular problem is simple: create
-a controller called `ArticlesController`. You can do this by running this
-command:
+Dieser Fehler tritt auf, da die Route einen Controller haben muss, um die
+Anfrage zu bedienen. The Lösung für dieses spezielle Problem ist einfach:
+man erstellt ein Controller `ArticlesController`. Das kann über folgenden
+Befehl getan werden:
 
 ```bash
 $ bin/rails generate controller Articles
 ```
 
-If you open up the newly generated `app/controllers/articles_controller.rb`
-you'll see a fairly empty controller:
+Wenn man nun die gerade erstellte Datei `app/controllers/articles_controller.rb`
+aufruft, sieht man einen recht leeren Controller:
 
 ```ruby
 class ArticlesController < ApplicationController
 end
 ```
 
-A controller is simply a class that is defined to inherit from
-`ApplicationController`.
-It's inside this class that you'll define methods that will become the actions
-for this controller. These actions will perform CRUD operations on the articles
-within our system.
+Ein Controller ist, einfach gesagt, eine Klasse, die so definiert ist, dass
+sie von `ApplicationController` vererbt ist.
+Innerhalb dieser Klasse werden Methoden definiert, die dann Actions des
+Controllers werden. Diese Actions führen CRUD-Operationen auf Artikel aus.
 
-NOTE: There are `public`, `private` and `protected` methods in Ruby,
-but only `public` methods can be actions for controllers.
-For more details check out [Programming Ruby](http://www.ruby-doc.org/docs/ProgrammingRuby/).
+HINWEIS: Es gibt drei verschiedene Arten von Methoden in Ruby: `public`,
+`private` and `protected`, aber nur `public`-Methoden können Actions eines
+Controllers sein.
+Weitere Details finden sich unter [Programming Ruby](http://www.ruby-doc.org/docs/ProgrammingRuby/).
 
-If you refresh <http://localhost:3000/articles/new> now, you'll get a new error:
+Wenn man nun die Adresse <http://localhost:3000/articles/new> aktualisiert,
+bekommt man einen neuen Fehler angezeigt:
 
 ![Unknown action new for ArticlesController!](images/getting_started/unknown_action_new_for_articles.png)
 
-This error indicates that Rails cannot find the `new` action inside the
-`ArticlesController` that you just generated. This is because when controllers
-are generated in Rails they are empty by default, unless you tell it
-your desired actions during the generation process.
+Dieser Fehler weist darauf hin, dass Rails die Action `new` nicht im
+`ArticlesController` finden kann. Der Grund dafür ist, dass in Rails erstellte
+Controller standardmäßig leer sind, es sei denn man teilt ihnen beim Erstellen
+Actions mit.
 
-To manually define an action inside a controller, all you need to do is to
-define a new method inside the controller. Open
-`app/controllers/articles_controller.rb` and inside the `ArticlesController`
-class, define the `new` method so that your controller now looks like this:
+Um eine Action in einem Controller manuell zu erstellen, muss man sie nur zum
+Controller hinzufügen. In diesem Fall öffnet man dazu
+`app/controllers/articles_controller.rb` und definiert innerhalb der Klasse
+`ArticlesController` die Methode `new`, so dass der Controller so aussieht:
 
 ```ruby
 class ArticlesController < ApplicationController
@@ -464,20 +465,23 @@ class ArticlesController < ApplicationController
 end
 ```
 
-With the `new` method defined in `ArticlesController`, if you refresh
-<http://localhost:3000/articles/new> you'll see another error:
+Aktualisiert man die Adresse <http://localhost:3000/articles/new> mit der
+nun erstellten Methode `new` im `ArticlesController` sieht man einen
+anderen Fehler:
 
 ![Template is missing for articles/new]
 (images/getting_started/template_is_missing_articles_new.png)
 
-You're getting this error now because Rails expects plain actions like this one
-to have views associated with them to display their information. With no view
-available, Rails will raise an exception.
+Man bekommt diesen Fehler, weil Rails bei einfachen Methoden, wie der gerade
+erstellten, erwartet, dass damit eine View verbunden ist, die die Informationen
+der Methode darstellt. Da keine View erstellt wurde, bringt Rails einen Fehler.
 
-In the above image, the bottom line has been truncated. Let's see what the full
-error message looks like:
+Im oberen Bild wurde ein Teil der Fehlermeldung abgeschnitten. So sieht sie
+komplett aus:
 
 >ArticlesController#new is missing a template for this request format and variant. request.formats: ["text/html"] request.variant: [] NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not… nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.
+
+
 
 That's quite a lot of text! Let's quickly go through and understand what each
 part of it means.
