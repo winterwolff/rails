@@ -481,48 +481,49 @@ komplett aus:
 
 >ArticlesController#new is missing a template for this request format and variant. request.formats: ["text/html"] request.variant: [] NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not… nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.
 
+Das ist schon sehr viel Text. Im Folgenden gibt es einen kurzen Überblickm, was
+die Fehlermeldung im Einzelnen bedeutet.
 
+Der erste Teil beschreibt, welches Template fehlt. In diesem Fall ist es das
+Template `articles/new`. Rails sucht als erstes dieses Template. Wenn es nicht
+gefunden wird, wird versucht das Template `application/new` zu laden. Dieses
+wird deswegen gesucht, weil der `ArticlesController` vom
+`ApplicationController` vererbt wird.
 
-That's quite a lot of text! Let's quickly go through and understand what each
-part of it means.
+Der nächste Teil der Fehlermeldung enthält `request.formats`, was beschreibt in
+welchem Format das Template ausgeliefert werden soll. Das Format wurde auf
+`text/html` festgelegt, da die Anfrage über einen Browser gestellt wurde und
+Rails dadurch ein HTML-Template sucht. `request.variant` spezifiziert, welche
+Art von Gerät bei der Antwort bedient wird und hilft Rails festzustellen,
+welches Template für die Antwort genutzt werden soll. Es ist leer, weil keine
+Information zur Verfügung gestellt wird.
 
-The first part identifies which template is missing. In this case, it's the
-`articles/new` template. Rails will first look for this template. If not found,
-then it will attempt to load a template called `application/new`. It looks for
-one here because the `ArticlesController` inherits from `ApplicationController`.
+Das einfachste Template, das in diesem Fall funktionieren würde, würde sich
+unter `app/views/articles/new.html.erb` befinden. Die Erweiterung des
+Dateinames ist wichtig: die erste Erweiterung ist das _format_ des Templates,
+die zweite Erweiterung ist der _handler_, der genutzt wird, um das Template
+wiederzugeben. Rails versucht, das Template `articles/new` innerhalb von
+`app/views` zu finden. Das Format für dieses Template kann nur `html` sein und
+der standardmäßige "handler" für HTML ist `erb`. Rails nutzt andere handler
+für andere Formate. Der `builder` handler wird genutzt, um XML-Templates zu
+erstellen und der `coffee` handler nutzt CoffeeScript, um Javascript-Templates
+zu erstellen. Da hier ein HTML-Formular erstellt werden soll, nutzt man `ERB`,
+das dafür erstellt wurde, um Ruby in HTML einzubinden.
 
-The next part of the message contains `request.formats` which specifies
-the format of template to be served in response. It is set to `text/html` as we
-requested this page via browser, so Rails is looking for an HTML template.
-`request.variant` specifies what kind of physical devices would be served by
-the response and helps Rails determine which template to use in the response.
-It is empty because no information has been provided.
+Deshalb sollte die Datei `articles/new.html.erb` genannt werden und muss sich
+innerhalb des Ordners `app/views` befinden.
 
-The simplest template that would work in this case would be one located at
-`app/views/articles/new.html.erb`. The extension of this file name is important:
-the first extension is the _format_ of the template, and the second extension
-is the _handler_ that will be used to render the template. Rails is attempting
-to find a template called `articles/new` within `app/views` for the
-application. The format for this template can only be `html` and the default
-handler for HTML is `erb`. Rails uses other handlers for other formats.
-`builder` handler is used to build XML templates and `coffee` handler uses
-CoffeeScript to build JavaScript templates. Since you want to create a new
-HTML form, you will be using the `ERB` language which is designed to embed Ruby
-in HTML.
-
-Therefore the file should be called `articles/new.html.erb` and needs to be
-located inside the `app/views` directory of the application.
-
-Go ahead now and create a new file at `app/views/articles/new.html.erb` and
-write this content in it:
+Um weiterzumachen muss die Datei `app/views/articles/new.html.erb` erstellt
+werden und folgenden Inhalt haben:
 
 ```html
 <h1>New Article</h1>
 ```
 
-When you refresh <http://localhost:3000/articles/new> you'll now see that the
-page has a title. The route, controller, action and view are now working
-harmoniously! It's time to create the form for a new article.
+Wenn man jetzt die Adresse <http://localhost:3000/articles/new> aktualisiert,
+sieht man, dass die Seite eine Überschrift hat. Die Route, der Controller, die
+Action und die View arbeiten nun harmonisch zusammen! Jetzt ist es an der
+Zeit ein Formular für einen neuen Artikel zu erstellen.
 
 ### The first form
 
