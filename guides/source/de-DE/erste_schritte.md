@@ -26,15 +26,14 @@ erfüllt sein:
 * [Ruby](https://www.ruby-lang.org/en/downloads) Version 2.2.2 oder aktueller.
 * Die richtige Version des [Development Kit](http://rubyinstaller.org/downloads/),
   wenn man Windows benutzt.
-* Das [RubyGems](https://rubygems.org) Packet System, das standardmäßig mit
+* Das [RubyGems](https://rubygems.org) Packaging System, das standardmäßig mit
   Ruby installiert wird. Weiterführende Informationen über RubyGems gibt es hier:
   [RubyGems Guides](http://guides.rubygems.org).
-* Einer funktionierende Installation einer [SQLite3 Datenbank](https://www.sqlite.org).
+* Einerfunktionierende Installation einer [SQLite3 Datenbank](https://www.sqlite.org).
 
-Rails ist ein Framework für Webanwendungen basierend auf der Programmiersprache Ruby.
-Wenn man noch keine Erfahrung mit Ruby hat, gibt es eine sehr hohe Lernkurve
-beim Erlernen von Rails. Es einige Möglichkeiten,
-um Ruby online zu lernen:
+Rails ist ein Framework für Webanwendungen, das auf der Programmiersprache Ruby
+basiert. Wenn man noch keine Erfahrung mit Ruby hat, gibt es eine sehr hohe Lernkurve
+beim Erlernen von Rails. Es einige Möglichkeiten, um Ruby online zu lernen:
 
 * [Die offizielle Webseite von Ruby](https://www.ruby-lang.org/en/documentation/)
 * [Eine Liste mit kostenfreien Programmierbüchern](https://github.com/vhf/free-programming-books/blob/master/free-programming-books.md#ruby)
@@ -48,7 +47,7 @@ Was ist Rails?
 
 Rails ist ein Framework für Webanwendungen, dass in Ruby geschrieben wurde.
 Es ist so konzipiert, dass Webanwendungen leicht erstellt werden können, indem
-Feststellungen getroffen wurden, die jeder Entwickler benötigt um anzufangen.
+Annahmen getroffen wurden, die jeder Entwickler benötigt, um anzufangen.
 Rails ermöglicht es mit weniger Code mehr zu erreichen als andere Sprachen oder
 Frameworks. Erfahrene Railsentwickler berichten auch, dass es mehr Spaß macht
 Webanwendungen zu erstellen.
@@ -57,8 +56,8 @@ Rails ist eine dogmatische Software. Es setzt voraus, das es den "besten" Weg
 gibt, um Dinge zu tun und es wurde so konzipiert, dass es diesen Weg fördert -
 und in manchen Fällen Alternativen verhindert. Wenn man den "Railsweg" geht,
 wird man wahrscheinlich eine gewaltige Steigerung von Produktivität bemerken.
-Wenn man versucht alte Gewohnheiten und Strukturen von anderen Sprachen
-in die Railsentwicklung einzubringen, wird man wahrscheinlich eine weniger
+Versuch man alte Gewohnheiten und Strukturen von anderen Sprachen
+in die Railsentwicklung zu stecken, wird man wahrscheinlich eine weniger
 freudige Erfahrung machen.
 
 Die Philosophie von Rails beinhaltet 2 Hauptprinzipien:
@@ -85,17 +84,17 @@ ein (sehr) einfacher Weblog. Vor dem Erstellen der Anwendung muss sichergestellt
 werden, dass Rails selbst installiert ist.
 
 TIPP: Die folgenden Beispiele nutzen `$`, um das Terminal in einem unixoiden
-Betriebssystem darzustellen (auch wenn das Aussehen geändert worden sein kann).
+Betriebssystem darzustellen (kann auch abgeändert worden sein).
 Wenn man Windows nutzt, wird das Terminal ungefähr so aussehen:
 `c:\source_code>`.
 
 ### Rails installieren
 
-Es muss ein Terminal geöffnet werden: Unter Mac OS X öffne Terminal.app, unter
-Windows muss man "Ausführen" aus dem Startmenü aufrufen und 'cmd.exe' eingeben
-und bestätigen. Alle Befehle, die mit einem Dollarzeichen `$` anfangen, sollen
-im Terminal ausgeführt werden. Es muss sichergestellt werden, dass man die
-aktuelle Rubyversion installiert hat:
+Es muss ein Terminal geöffnet werden: Unter Mac OS X öffnet man Terminal.app,
+unter Windows muss man "Ausführen" aus dem Startmenü aufrufen und 'cmd.exe'
+eingeben und bestätigen. Alle Befehle, die mit einem Dollarzeichen `$`
+anfangen, sollen im Terminal ausgeführt werden. Es muss sichergestellt werden,
+dass man die aktuelle Rubyversion installiert hat:
 
 ```bash
 $ ruby -v
@@ -142,8 +141,8 @@ Wenn etwas wie "Rails 5.0.0" ausgegeben wird, kann man weitermachen.
 Rails hat einige Skripte, die "generators" genannt werden, die erstellt wurden,
 um die Entwicklung leichter zu machen, in dem sie alles bereitstellen, dass
 nötig ist, um eine bestimmte Aufgabe anzufangen. Eines dieser Skripte ist der
-Generator zum Erstellen einer neuen Anwendung, der die Grundlage einer
-frischen Railsanwendung bereitstellt, so dass man sie nicht selbst anlegen muss.
+Generator zum Erstellen einer neuen Anwendung, der die Grundlagen einer
+frischen Railsanwendung schaft, so dass man sie nicht selbst anlegen muss.
 
 Um den Generator zu nutzen, muss man ein Terminal öffnen, zu einem Verzeichnis
 gehen, in dem man Dateien erstellen darf und folgenden Befehl eingeben:
@@ -196,8 +195,8 @@ die Funktionen der Dateien und Ordner, die Rails standardmäßig erstellt:
 Hallo, Rails!
 -------------
 
-Für den Anfang wird ein kurzer Text dargestellt. Um das zu tun, muss der Server
-der Anwendung laufen.
+Für den Anfang soll ein kurzer Text dargestellt werden. Um das zu erreichen,
+muss der Server der Anwendung laufen.
 
 ### Den Webserver starten
 
@@ -233,15 +232,15 @@ Man sollte nun die voreingestellte Informationsseite sehen:
 ![Welcome aboard screenshot](images/erste_schritte/rails_welcome.png)
 
 TIPP: Um den Webserver zu stoppen, muss man in dem Terminalfenster, in dem der
-Server läuft STRG+C drücken. Nun sollte man den normalen Cursor im Terminal
+Server läuft, STRG+C drücken. Nun sollte man den normalen Cursor im Terminal
 sehen. Für die meisten unixoiden Betriebssysteme, was auch Mac OS X beinhaltet,
 ist das ein Dollarzeichen `$`. Im Entwicklungsmodus von Rails ist ein Neustart
-allgemein nicht nötig. Veränderungen in Dateien werden vom Server automatisch
+allgemein nicht nötig. Veränderungen von Dateien werden vom Server automatisch
 erkannt.
 
-Die Seite "Welcome aboard" ist ein _Rauchtest_ für eine neue Railsanwendung:
-Er stellt sicher, dass die Software richtig eingerichtet wurde, um eine
-Webseite anzuzeigen.
+Die Seite "Welcome aboard" ist ein [_Rauchtest_](https://de.wikipedia.org/wiki/Smoke_testing)
+für eine neue Railsanwendung: Er stellt sicher, dass die Software richtig
+eingerichtet wurde, um eine Webseite anzuzeigen.
 
 ### Rails, sag "Hello"
 
