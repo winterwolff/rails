@@ -251,7 +251,7 @@ Die Aufgabe eines Controllers ist es spezifische Anfragen der Anwendung zu
 empfangen. Das _Routing_ entscheidet, welcher Controller welche Anfrage empfängt.
 Es gibt oft mehr als eine Route zu jedem Controller. Verschiedene Routen
 werden von verschiedenen _actions_ bedient. Die Aufgabe jeder Action ist es
-Informationen zu sammeln und diese der View zur Vergfügung zu stellen.
+Informationen zu sammeln und diese der View zur Verfügung zu stellen.
 
 Die Aufgabe der View ist es, diese Informationen in einem für Menschen
 lesbaren Format darzustellen. Ein wichtiger Unterschied ist, dass der
@@ -335,7 +335,7 @@ end
 Anwendung durch die Index-Action des Welcome-Controllers abgebildet werden sollen.
 `get 'welcome/index'` teilt Rails mit, dass Anfragen auf
 <http://localhost:3000/welcome/index> auch durch die Index-Action des
-Welcome-Controllers abgebildet werden sollen. Das wurde festgelegt, als der
+Welcome-Controllers bearbeitet werden sollen. Das wurde festgelegt, als der
 Generator des Controllers ausgeführt wurde
 (`bin/rails generate controller Welcome index`).
 
@@ -353,7 +353,7 @@ Konfigurieren und Ausführen
 Jetzt, da man gesehen hat, wie man einen Controller, eine Action und eine View
 erstellt, kann man etwas anspruchsvolleres erstellen.
 
-In der Bloganwendung wird nun eine neue _resource_ erstellt. Eine resouce steht
+In der Bloganwendung wird nun eine neue _resource_ erstellt. Eine Ressouce steht
 für eine Sammlung gleicher Objekte, wie Artikel, Leute oder Tiere verwendet wird.
 
 Man kann Einzelteile einer Ressouce erstellen (create), lesen (read),
