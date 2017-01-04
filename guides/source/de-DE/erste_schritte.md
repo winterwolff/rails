@@ -523,12 +523,12 @@ sieht man, dass die Seite eine Überschrift hat. Die Route, der Controller, die
 Action und die View arbeiten nun harmonisch zusammen! Jetzt ist es an der
 Zeit ein Formular für einen neuen Artikel zu erstellen.
 
-### The first form
+### Das erste Formular
 
-To create a form within this template, you will use a *form
-builder*. The primary form builder for Rails is provided by a helper
-method called `form_for`. To use this method, add this code into
-`app/views/articles/new.html.erb`:
+Um ein Formular in dem Template zu erstellen, nutzt man den *form builder*.
+Der primäre Form Builder für Rails wird von der Helper Methode `form_for`
+gestellt. Um diese Methode zu nutzen, muss man folgenden Code in
+`app/views/articles/new.html.erb` einfügen:
 
 ```html+erb
 <%= form_for :article do |f| %>
@@ -548,8 +548,10 @@ method called `form_for`. To use this method, add this code into
 <% end %>
 ```
 
-If you refresh the page now, you'll see the exact same form from our example above.
-Building forms in Rails is really just that easy!
+Wenn man nun die Seite aktualisiert, sieht man das gleiche Formular vom
+oberen Beispiel. Formulare in Rails zu erstellen, ist wirklich so einfach!
+
+
 
 When you call `form_for`, you pass it an identifying object for this
 form. In this case, it's the symbol `:article`. This tells the `form_for`
