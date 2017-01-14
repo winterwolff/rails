@@ -29,7 +29,7 @@ erfüllt sein:
 * Das [RubyGems](https://rubygems.org) Packaging System, das standardmäßig mit
   Ruby installiert wird. Weiterführende Informationen über RubyGems gibt es hier:
   [RubyGems Guides](http://guides.rubygems.org).
-* Einerfunktionierende Installation einer [SQLite3 Datenbank](https://www.sqlite.org).
+* Eine funktionierende Installation einer [SQLite3 Datenbank](https://www.sqlite.org).
 
 Rails ist ein Framework für Webanwendungen, das auf der Programmiersprache Ruby
 basiert. Wenn man noch keine Erfahrung mit Ruby hat, gibt es eine sehr hohe Lernkurve
@@ -55,9 +55,9 @@ Webanwendungen zu erstellen.
 Rails ist eine dogmatische Software. Es setzt voraus, das es den "besten" Weg
 gibt, um Dinge zu tun und es wurde so konzipiert, dass es diesen Weg fördert -
 und in manchen Fällen Alternativen verhindert. Wenn man den "Railsweg" geht,
-wird man wahrscheinlich eine gewaltige Steigerung von Produktivität bemerken.
+wird man wahrscheinlich eine gewaltige Steigerung seiner Produktivität bemerken.
 Versuch man alte Gewohnheiten und Strukturen von anderen Sprachen
-in die Railsentwicklung zu stecken, wird man wahrscheinlich eine weniger
+in die Entwicklung mit Rails zu stecken, wird man wahrscheinlich eine weniger
 freudige Erfahrung machen.
 
 Die Philosophie von Rails beinhaltet 2 Hauptprinzipien:
@@ -91,7 +91,7 @@ Wenn man Windows nutzt, wird das Terminal ungefähr so aussehen:
 ### Rails installieren
 
 Es muss ein Terminal geöffnet werden: Unter Mac OS X öffnet man Terminal.app,
-unter Windows muss man "Ausführen" aus dem Startmenü aufrufen und 'cmd.exe'
+unter Windows muss man "Ausführen" aus dem Startmenü aufrufen und "cmd.exe"
 eingeben und bestätigen. Alle Befehle, die mit einem Dollarzeichen `$`
 anfangen, sollen im Terminal ausgeführt werden. Es muss sichergestellt werden,
 dass man die aktuelle Rubyversion installiert hat:
@@ -151,7 +151,7 @@ gehen, in dem man Dateien erstellen darf und folgenden Befehl eingeben:
 $ rails new blog
 ```
 
-Dies wird eine Railsanwendung namens Blog in einem `blog` Verzeichnis
+Dies wird eine Railsanwendung namens "Blog" in einem `blog` Verzeichnis
 erstellen und die Gem-Abhängigkeiten, die in der `Gemfile` festgelegt sind,
 über `bundle install` installieren.
 
@@ -353,10 +353,10 @@ Konfigurieren und Ausführen
 Jetzt, da man gesehen hat, wie man einen Controller, eine Action und eine View
 erstellt, kann man etwas anspruchsvolleres erstellen.
 
-In der Bloganwendung wird nun eine neue _resource_ erstellt. Eine Ressouce steht
-für eine Sammlung gleicher Objekte, wie Artikel, Leute oder Tiere verwendet wird.
+In der Bloganwendung wird nun eine neue _resource_ erstellt. Eine Ressource steht
+für eine Sammlung gleicher Objekte, wie Artikel, Leute oder Tiere.
 
-Man kann Einzelteile einer Ressouce erstellen (create), lesen (read),
+Man kann Elemente einer Ressource erstellen (create), lesen (read),
 aktualisieren (update) und löschen (destroy). Diese Operationen werden als
 _CRUD_ -Operationen bezeichnet.
 
@@ -377,7 +377,7 @@ end
 
 Wenn man `bin/rails routes` ausführt, sieht man, dass es nun definierte Routen
 für alle standardmäßigen "RESTful Actions" gibt. Die Bedeutung der
-verschiedenen Spalten wird später erklärt. Fürs Erste reicht, dass man sieht,
+verschiedenen Spalten wird später erklärt. Fürs Erste reicht es, dass man sieht,
 dass Rails die Einzahl `article` verwendet und von dem Unterschied zwischen
 Einzahl und Mehrzahl Gebrauch macht.
 
@@ -405,7 +405,7 @@ neuen Artikels wird so aussehen:
 Fürs Erste sieht das etwas einfach aus, aber das ist ok. Im weiteren Verlauf
 wird das Aussehen verbessert.
 
-### Die Grundlage bilden
+### Die Grundlage
 
 Als erstes benötigt man einen Bereich innerhalb der Anwendung, um einen neuen
 Artikel zu erstellen. Ein passender Bereich dafür wäre unter `/articles/new`.
@@ -551,7 +551,9 @@ gestellt. Um diese Methode zu nutzen, muss man folgenden Code in
 Wenn man nun die Seite aktualisiert, sieht man das gleiche Formular vom
 oberen Beispiel. Formulare in Rails zu erstellen, ist wirklich so einfach!
 
-
+Wenn man `form_for` aufruft, übergibt man ein Objekt für das Formular. In
+diesem Fall ist es das Symbol `:article`. Das teilt dem Helper `form_for` mit,
+für was das Formular sein soll.
 
 When you call `form_for`, you pass it an identifying object for this
 form. In this case, it's the symbol `:article`. This tells the `form_for`
