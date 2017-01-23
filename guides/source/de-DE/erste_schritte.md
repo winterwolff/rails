@@ -759,10 +759,10 @@ explizit dem Befehl mitgeben: `bin/rails db:migrate RAILS_ENV=production`.
 
 ### Daten im Controller speichern
 
-Back in `ArticlesController`, we need to change the `create` action
-to use the new `Article` model to save the data in the database.
-Open `app/controllers/articles_controller.rb` and change the `create` action to
-look like this:
+Man muss die Action `create` im `ArticlesController` ändern, um das neue
+`Article`-Model zu nutzen Daten in der Datenbank zu speichern. Dazu muss man
+`app/controllers/articles_controller.rb` öffnen und die `create`-Action
+folgendermaßen abändern:
 
 ```ruby
 def create
