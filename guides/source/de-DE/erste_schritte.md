@@ -655,56 +655,59 @@ zurück, das es erlaubt, auf die Schlüssel des Hashes entweder mit Strings
 oder Symbols zuzugreifen. In dieser Situation sind die einzig wichtigen
 Parameter die, die von dem Formular kommen.
 
-TIPP: 
+TIPP: Man benötigt ein sicheres Verständnis der `params`-Methode, da sie regelmäßig genutzt wird. Betrachtet man die
+Bespiel-URL **http://www.example.com/?username=dhh&email=dhh@email.com**, sieht man, dass `params[:username]` gleich "dhh"
+und `params[:email]` gleich "ddh@email.com" ist.
 
-TIP: Ensure you have a firm grasp of the `params` method, as you'll use it fairly regularly. Let's consider an example URL: **http://www.example.com/?username=dhh&email=dhh@email.com**. In this URL, `params[:username]` would equal "dhh" and `params[:email]` would equal "dhh@email.com".
-
-If you re-submit the form one more time, you'll see something that looks like the following:
+Wenn man nun nochmal das Formular bestätigt, sieht man etwas ähnlich es wie das folgende:
 
 ```ruby
 <ActionController::Parameters {"title"=>"First Article!", "text"=>"This is my first article."} permitted: false>
 ```
 
-This action is now displaying the parameters for the article that are coming in
-from the form. However, this isn't really all that helpful. Yes, you can see the
-parameters but nothing in particular is being done with them.
+Diese Action stellt jetzt die Parameter des Artikels, die von dem Formular
+kommen, dar. Das hilft aber nicht wirklich weiter. Ja, man sieht die
+Parameter, aber es wird nichts bestimmtes mit ihnen gemacht.
 
-### Creating the Article model
+### Erstellen des Article model
 
-Models in Rails use a singular name, and their corresponding database tables
-use a plural name. Rails provides a generator for creating models, which most
-Rails developers tend to use when creating new models. To create the new model,
-run this command in your terminal:
+Der Name von Models in Rails ist in der Einzahl, ihre zugehörigen
+Datenbanktabellen sind in Plural. Rails stellt einen Generator zum Erstellen
+von Models bereit. Die meisten Railsentwickler neigen dazu ihn zu nutzen, um
+neue Models zu erstellen. Um das neue Model zu erstellen, führt man folgenden
+Befehl in einem Terminal aus:
 
 ```bash
 $ bin/rails generate model Article title:string text:text
 ```
 
-With that command we told Rails that we want an `Article` model, together
-with a _title_ attribute of type string, and a _text_ attribute
-of type text. Those attributes are automatically added to the `articles`
-table in the database and mapped to the `Article` model.
+Mit diesem Befehl wird Rails mitgeteilt, dass ein `Article`-Model benötigt wird,
+das ein _title_-Attribut vom Typ "string" und ein _text_-Attribut vom Typ
+"text" hat. Diese Attribute werden automatisch in die `articles`-Tabelle in der
+Datenbank hinzugefügt und auf das `Article`-Model abgebildet.
 
-Rails responded by creating a bunch of files. For now, we're only interested
-in `app/models/article.rb` and `db/migrate/20140120191729_create_articles.rb`
-(your name could be a bit different). The latter is responsible for creating
-the database structure, which is what we'll look at next.
+Rails antwortete, indem es einige Dateien erstellt hat. Vorerst sind nur
+`app/models/article.rb` und `db/migrate/20140120191729_create_articles.rb`
+(dieser Name kann abweichen) interessant. Die Letztere ist verantwortlich für
+das Erstellen der Datenbankstruktur, die als nächstes behandelt wird.
 
-TIP: Active Record is smart enough to automatically map column names to model
-attributes, which means you don't have to declare attributes inside Rails
-models, as that will be done automatically by Active Record.
+TIPP: Active Record ist intelligent genug, um automatisch Spaltennamen auf
+Modelattribute abzubilden, d.h. man muss selbst keine Attribute von Models
+deklarieren.
 
-### Running a Migration
+### Durchführen einer Migration
 
-As we've just seen, `bin/rails generate model` created a _database migration_ file
-inside the `db/migrate` directory. Migrations are Ruby classes that are
-designed to make it simple to create and modify database tables. Rails uses
-rake commands to run migrations, and it's possible to undo a migration after
-it's been applied to your database. Migration filenames include a timestamp to
-ensure that they're processed in the order that they were created.
+Wie gerade gesehen, erstellt der Befehl `bin/rails generate model` eine
+_database migration_-Datei im Verzeichnis `db/migrate`. Migrationen sind
+Rubyklassen, die konzipiert wurden, um das Erstellen und Verändern von
+Datenbanktabellen zu erleichtern. Rails nutzt Rake-Befehle, um Migrationen
+durchzuführen und es ist möglich Migrationen rückgängig zu machen, die schon
+in die Datenbank geschrieben wurden. Die Dateinamen von Migrationen beinhalten
+einen Zeitstempel um sicherzustellen, dass sie in der Reihenfolge durchgeführt
+werden, in der sie erstellt wurden.
 
-If you look in the `db/migrate/YYYYMMDDHHMMSS_create_articles.rb` file
-(remember, yours will have a slightly different name), here's what you'll find:
+Wenn man sich die Datei `db/migrate/YYYYMMDDHHMMSS_create_articles.rb` ansieht,
+wird man folgendes finden:
 
 ```ruby
 class CreateArticles < ActiveRecord::Migration[5.0]
@@ -719,24 +722,27 @@ class CreateArticles < ActiveRecord::Migration[5.0]
 end
 ```
 
-The above migration creates a method named `change` which will be called when
-you run this migration. The action defined in this method is also reversible,
-which means Rails knows how to reverse the change made by this migration,
-in case you want to reverse it later. When you run this migration it will create
-an `articles` table with one string column and a text column. It also creates
-two timestamp fields to allow Rails to track article creation and update times.
+Die obenstehende Migration erstellt eine Methode namens `change`, die aufgerufen
+wird, wenn die Migration durchgeführt wird. Die Action, die in dieser Methode
+festgelegt ist, ist auch umkehrbar, was bedeutet, dass Rails weiß, wie die
+Änderungen durch diese Migration rückgängig gemacht werden können, für den Fall,
+dass man sie später rückgängig machen möchte. Wenn man die Migration durchführt,
+wird sie eine `articles`-Tabelle mit einer String- und einer einer Text-Spalte
+erstellen. Sie erstellt außerdem zwei Zeitstempelfelder, die es Rails erlauben,
+die Zeiten der Erstellung und Verändung von Artikeln nachzuvollziehen.
 
-TIP: For more information about migrations, refer to [Active Record Migrations]
+TIPP: Weitere Informationen zu Migrationen gibt es unter [Active Record Migrations]
 (active_record_migrations.html).
 
-At this point, you can use a bin/rails command to run the migration:
+An diesem Punkt kann man ein bin/rails-Kommando nutzen, um die Migration
+durchzuführen:
 
 ```bash
 $ bin/rails db:migrate
 ```
 
-Rails will execute this migration command and tell you it created the Articles
-table.
+Rails führt den Migrationsbefehl aus und zeigt an, dass es die Artikeltabelle
+erstellt hat.
 
 ```bash
 ==  CreateArticles: migrating ==================================================
@@ -745,13 +751,13 @@ table.
 ==  CreateArticles: migrated (0.0020s) =========================================
 ```
 
-NOTE. Because you're working in the development environment by default, this
-command will apply to the database defined in the `development` section of your
-`config/database.yml` file. If you would like to execute migrations in another
-environment, for instance in production, you must explicitly pass it when
-invoking the command: `bin/rails db:migrate RAILS_ENV=production`.
+HINWEIS: Da man standardmäßig in der Entwicklungsumgebung arbeitet, wird der
+Befehl auf die Datenbank ausgeführt, die im Bereich `development` der Datei
+`config/database.yml` aufgeführt ist. Wenn man die Migration in einer anderen
+Umgebung ausführen möchte, beispielsweise in der Produktion, muss man das
+explizit dem Befehl mitgeben: `bin/rails db:migrate RAILS_ENV=production`.
 
-### Saving data in the controller
+### Daten im Controller speichern
 
 Back in `ArticlesController`, we need to change the `create` action
 to use the new `Article` model to save the data in the database.
