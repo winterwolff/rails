@@ -33,14 +33,14 @@ erfüllt sein:
 
 Rails ist ein Framework für Webanwendungen, das auf der Programmiersprache Ruby
 basiert. Wenn man noch keine Erfahrung mit Ruby hat, gibt es eine sehr hohe Lernkurve
-beim Erlernen von Rails. Es einige Möglichkeiten, um Ruby online zu lernen:
+beim Erlernen von Rails. Es gibt einige Möglichkeiten, um Ruby online zu lernen:
 
 * [Die offizielle Webseite von Ruby](https://www.ruby-lang.org/en/documentation/)
 * [Eine Liste mit kostenfreien Programmierbüchern](https://github.com/vhf/free-programming-books/blob/master/free-programming-books.md#ruby)
 
 Man muss sich aber bewusst sein, dass manche Quellen, auch wenn sie sehr gut sind,
 alte Versionen von Ruby (1.6 oder überlicherweise 1.8) abdecken und keine Syntax
-der aktuellen Railsversion zeigen.
+der aktuellen Railsversion enthalten.
 
 Was ist Rails?
 --------------
@@ -104,9 +104,8 @@ ruby 2.3.1p112
 TIPP: Es gibt einige Tools mit denen man schnell Ruby und Ruby on Rails
 installieren kann. Unter Windows kann man den [Rails Installer](http://railsinstaller.org)
 benutzen, während man unter Mac OS X [Tokaido](https://github.com/tokaido/tokaidoapp)
-nutzen kann. Für weitere Installationsmöglichkeiten für die meisten Betriebssysteme
-kann unter [ruby-lang.org](https://www.ruby-lang.org/en/documentation/installation/)
-nachschauen.
+nutzen kann. Weitere Installationsmöglichkeiten für die meisten Betriebssysteme
+gibt es unter [ruby-lang.org](https://www.ruby-lang.org/en/documentation/installation/).
 
 Viele bekannte unixoide Betriebssysteme kommen standardmäßig mit einer
 passenden SQLite3-Version. Wenn man Rails mit dem Railsinstaller unter
@@ -142,7 +141,7 @@ Rails hat einige Skripte, die "generators" genannt werden, die erstellt wurden,
 um die Entwicklung leichter zu machen, in dem sie alles bereitstellen, dass
 nötig ist, um eine bestimmte Aufgabe anzufangen. Eines dieser Skripte ist der
 Generator zum Erstellen einer neuen Anwendung, der die Grundlagen einer
-frischen Railsanwendung schaft, so dass man sie nicht selbst anlegen muss.
+neuen Railsanwendung bereitstellt, so dass man sie nicht selbst anlegen muss.
 
 Um den Generator zu nutzen, muss man ein Terminal öffnen, zu einem Verzeichnis
 gehen, in dem man Dateien erstellen darf und folgenden Befehl eingeben:
@@ -317,7 +316,7 @@ end
 ```
 
 Dies ist die _routing file_ der Anwendung, die Einträge in einer bestimmten
-[DSL (domain-specific language)](http://en.wikipedia.org/wiki/Domain-specific_language)
+[DSL (domain-specific language)](https://de.wikipedia.org/wiki/Dom%C3%A4nenspezifische_Sprache)
 enthält. Durch diese weiß Rails, welche eintreffenden Anfragen mit welchem
 Controller und welcher Action verbunden werden sollen.
 Diese Datei muss um folgendes erweitert werden: `root 'welcome#index'`.
@@ -502,9 +501,9 @@ Dateinames ist wichtig: die erste Erweiterung ist das _format_ des Templates,
 die zweite Erweiterung ist der _handler_, der genutzt wird, um das Template
 wiederzugeben. Rails versucht, das Template `articles/new` innerhalb von
 `app/views` zu finden. Das Format für dieses Template kann nur `html` sein und
-der standardmäßige "handler" für HTML ist `erb`. Rails nutzt andere handler
-für andere Formate. Der `builder` handler wird genutzt, um XML-Templates zu
-erstellen und der `coffee` handler nutzt CoffeeScript, um Javascript-Templates
+der standardmäßige Handler für HTML ist `erb`. Rails nutzt andere Handler
+für andere Formate. Der `builder`-Handler wird genutzt, um XML-Templates zu
+erstellen und der `coffee`-Handler nutzt CoffeeScript, um Javascript-Templates
 zu erstellen. Da hier ein HTML-Formular erstellt werden soll, nutzt man `ERB`,
 das dafür erstellt wurde, um Ruby in HTML einzubinden.
 
@@ -598,7 +597,7 @@ edit_article GET    /articles/:id/edit(.:format) articles#edit
 
 Der Helper `articles_path` teilt Rails mit, dass das Formular auf das
 "URI Pattern" zeigt, das mit dem `articles`-Präfix verbunden ist. Und das
-Formular wird (standardmäßig) `POST`-Anfragen an diese Route senden. 
+Formular wird (standardmäßig) `POST`-Anfragen an diese Route senden.
 
 The `articles_path` helper tells Rails to point the form to the URI Pattern
 associated with the `articles` prefix; and the form will (by default) send a
