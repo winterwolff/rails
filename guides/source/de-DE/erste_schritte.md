@@ -553,36 +553,34 @@ oberen Beispiel. Formulare in Rails zu erstellen, ist wirklich so einfach!
 
 Wenn man `form_for` aufruft, übergibt man ein Objekt für das Formular. In
 diesem Fall ist es das Symbol `:article`. Das teilt dem Helper `form_for` mit,
-für was das Formular sein soll.
+für was das Formular sein soll. Innerhalb des Blocks dieser Methode wird das
+`FormBuilder`-Objekt - repräsentiert durch das `f` - genutzt, um zwei Label und
+zwei Textfelder zu erstellen. Jeweils eines für den Titel und den Text eines
+Artikels. Am Ende wird über einen Aufruf von `submit` auf `f` ein
+Bestätigungsbutton für das Formular erstellt.
 
-When you call `form_for`, you pass it an identifying object for this
-form. In this case, it's the symbol `:article`. This tells the `form_for`
-helper what this form is for. Inside the block for this method, the
-`FormBuilder` object - represented by `f` - is used to build two labels and two
-text fields, one each for the title and text of an article. Finally, a call to
-`submit` on the `f` object will create a submit button for the form.
+Es gibt jedoch ein Problem mit diesem Formular. Wenn man sich das generierte
+HTML im Quellcode der Seite ansieht, wird man sehen, dass die
+`action`-Attribute für das Formular auf `/articles/new` zeigen. Das ist ein
+Problem, weil diese Route auf die Seite zeigt, auf der man im Moment ist und
+diese Route sollte nur genutzt werden, um das Formular für einen neuen
+Artikel anzuzeigen.
 
-There's one problem with this form though. If you inspect the HTML that is
-generated, by viewing the source of the page, you will see that the `action`
-attribute for the form is pointing at `/articles/new`. This is a problem because
-this route goes to the very page that you're on right at the moment, and that
-route should only be used to display the form for a new article.
+Das Formular benötigt eine andere URL, um woanders hinzuführen. Das kann ganz
+leicht mit der Option `:url` von `form_for` erledigt werden. Normalerweise
+heißt die Action in Rails, die genutzt wird, um neue Formulare zu bestätigen
+"create" und deswegen sollte das Formular auch dorthin zeigen.
 
-The form needs to use a different URL in order to go somewhere else.
-This can be done quite simply with the `:url` option of `form_for`.
-Typically in Rails, the action that is used for new form submissions
-like this is called "create", and so the form should be pointed to that action.
-
-Edit the `form_for` line inside `app/views/articles/new.html.erb` to look like
-this:
+Nun muss die Zeile mit `form_for` in `app/views/articles/new.html.erb`
+folgendermaßen abgeändert werden:
 
 ```html+erb
 <%= form_for :article, url: articles_path do |f| %>
 ```
 
-In this example, the `articles_path` helper is passed to the `:url` option.
-To see what Rails will do with this, we look back at the output of
-`bin/rails routes`:
+In diesem Beispiel wird der Helper `articles_path` an die `:url`-Option
+übergeben. Um zu sehen, was Rails damit macht, schaut man sich erneut die
+Ausgabe von `bin/rails routes` an:
 
 ```bash
 $ bin/rails routes
@@ -597,6 +595,10 @@ edit_article GET    /articles/:id/edit(.:format) articles#edit
              DELETE /articles/:id(.:format)      articles#destroy
         root GET    /                            welcome#index
 ```
+
+Der Helper `articles_path` teilt Rails mit, dass das Formular auf das
+"URI Pattern" zeigt, das mit dem `articles`-Präfix verbunden ist. Und das
+Formular wird (standardmäßig) `POST`-Anfragen an diese Route senden. 
 
 The `articles_path` helper tells Rails to point the form to the URI Pattern
 associated with the `articles` prefix; and the form will (by default) send a
