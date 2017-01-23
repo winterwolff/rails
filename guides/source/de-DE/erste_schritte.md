@@ -598,28 +598,25 @@ edit_article GET    /articles/:id/edit(.:format) articles#edit
 Der Helper `articles_path` teilt Rails mit, dass das Formular auf das
 "URI Pattern" zeigt, das mit dem `articles`-Präfix verbunden ist. Und das
 Formular wird (standardmäßig) `POST`-Anfragen an diese Route senden.
+Das geht mit der Action `create` des aktuellen Controllers, des `ArticlesController`,
+einher.
 
-The `articles_path` helper tells Rails to point the form to the URI Pattern
-associated with the `articles` prefix; and the form will (by default) send a
-`POST` request to that route. This is associated with the `create` action of
-the current controller, the `ArticlesController`.
-
-With the form and its associated route defined, you will be able to fill in the
-form and then click the submit button to begin the process of creating a new
-article, so go ahead and do that. When you submit the form, you should see a
-familiar error:
+Durch das definierte Formular und der damit verbundenen Route ist es nun möglich
+das Formular auszufüllen und den "Submit"-Button zu betätigen, um das Erstellen
+eines neuen Artikels anzustoßen. Wenn man das tut, sollte man einen bekannten
+Fehler sehen:
 
 ![Unknown action create for ArticlesController]
 (images/getting_started/unknown_action_create_for_articles.png)
 
-You now need to create the `create` action within the `ArticlesController` for
-this to work.
+Man muss die Action `create` in dem `ArticlesController` erstellen, damit es
+funktioniert.
 
-### Creating articles
+### Erstellen von Artikeln
 
-To make the "Unknown action" go away, you can define a `create` action within
-the `ArticlesController` class in `app/controllers/articles_controller.rb`,
-underneath the `new` action, as shown:
+Um die Fehlermeldung "Unknown action" zu entfernen, kann man eine `create`-Action
+in der `ArticlesController`-Klasse in `app/controllers/articles_controller.rb`
+unterhalt der `new`-Action definieren:
 
 ```ruby
 class ArticlesController < ApplicationController
@@ -631,16 +628,18 @@ class ArticlesController < ApplicationController
 end
 ```
 
-If you re-submit the form now, you may not see any change on the page. Don't worry!
-This is because Rails by default returns `204 No Content` response for an action if
-we don't specify what the response should be. We just added the `create` action
-but didn't specify anything about how the response should be. In this case, the
-`create` action should save our new article to the database.
+Wenn man nun das Formular noch ein mal bestätigt, sieht man keine Veränderung
+auf der Seite. Das liegt daran, dass Rails standmäßig `204 No Content` bei
+einer Action ausgibt, wenn man keine Rückmeldung festgelegt hat. Es wurde nur
+die `create`-Action hinzugefügt, aber es wurde gar nicht festgelegt, wie die
+Rückmeldung aussehen soll. In diesem Fall soll die `create`-Action den neuen
+Artikel in der Datenbank speichern.
 
-When a form is submitted, the fields of the form are sent to Rails as
-_parameters_. These parameters can then be referenced inside the controller
-actions, typically to perform a particular task. To see what these parameters
-look like, change the `create` action to this:
+Wenn ein Formular bestätigt wird, werden die Felder des Formulars als
+_parameters_ an Rails geschickt. Auf diese Parameter kann dann innerhalb der
+Controller-Actions verwiesen werden, um typischerweise eine bestimmte
+Aufgabe zu erfüllen. Um zu sehen, wie diese Parameter aussehen, muss die
+`create`-Action folgendermaßen abgeändert werden:
 
 ```ruby
 def create
@@ -648,12 +647,15 @@ def create
 end
 ```
 
-The `render` method here is taking a very simple hash with a key of `:plain` and
-value of `params[:article].inspect`. The `params` method is the object which
-represents the parameters (or fields) coming in from the form. The `params`
-method returns an `ActionController::Parameters` object, which
-allows you to access the keys of the hash using either strings or symbols. In
-this situation, the only parameters that matter are the ones from the form.
+Die `render`-Methode übernimmt einen sehr einfachen Hash mit einem Schlüssel
+`:plain` und einem Wert `params[:article].inspect`. Die `params`-Methode ist
+das Objekt, das die Parameter (oder Felder), die von dem Formular kommen,
+darstellt. Die `params`-Methode gibt ein `ActionController::Parameters`-Objekt
+zurück, das es erlaubt, auf die Schlüssel des Hashes entweder mit Strings
+oder Symbols zuzugreifen. In dieser Situation sind die einzig wichtigen
+Parameter die, die von dem Formular kommen.
+
+TIPP: 
 
 TIP: Ensure you have a firm grasp of the `params` method, as you'll use it fairly regularly. Let's consider an example URL: **http://www.example.com/?username=dhh&email=dhh@email.com**. In this URL, `params[:username]` would equal "dhh" and `params[:email]` would equal "dhh@email.com".
 
